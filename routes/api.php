@@ -2,9 +2,13 @@
 
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\AppartementController;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\ContributionController;
 use App\Http\Controllers\CoproprieteController;
+use App\Http\Controllers\DepenseController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ImmobilierController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SyndicatController;
 use App\Http\Controllers\UserController;
@@ -56,11 +60,11 @@ Route::middleware(['auth:sanctum'])->group(function () {                        
         Route::delete('events/{id}', 'destroy');//ok
     });
     Route::controller(CoproprieteController::class)->group(function () {
-        Route::get('copropriétés', 'index');//ok
-        Route::post('copropriétés', 'store');//ok
-        Route::get('copropriétés/{id}', 'show');//ok
-        Route::put('copropriétés/{id}', 'update');//ok
-        Route::delete('copropriétés/{id}', 'destroy');//ok
+        Route::get('coproprietes', 'index');//ok
+        Route::post('coproprietes', 'store');//ok
+        Route::get('coproprietes/{id}', 'show');//ok
+        Route::put('coproprietes/{id}', 'update');//ok
+        Route::delete('coproprietes/{id}', 'destroy');//ok
     });
     Route::controller(ServiceController::class)->group(function () {
         Route::get('services', 'index');//ok
@@ -69,6 +73,23 @@ Route::middleware(['auth:sanctum'])->group(function () {                        
         Route::put('services/{id}', 'update');//ok
         Route::delete('services/{id}', 'destroy');//ok
     });
+    Route::controller(ContributionController::class)->group(function () {
+        Route::get('contributions', 'index');//ok
+        Route::post('contributions', 'store');//ok
+        Route::get('contributions/{id}', 'show');//ok
+        Route::put('contributions/{id}', 'update');//ok
+        Route::delete('contributions/{id}', 'destroy');//ok
+    });
+    Route::controller(DepenseController::class)->group(function () {
+        Route::get('depenses', 'index');//ok
+        Route::post('depenses', 'store');//ok
+        Route::get('depenses/{id}', 'show');//ok
+        Route::put('depenses/{id}', 'update');//ok
+        Route::delete('depenses/{id}', 'destroy');//ok
+    });
+    Route::post("SendMessage", [ChatController::class, "SendMessage"]);
+    Route::get("load", [MessageController::class, "LoadThePreviousMessages"]);
+    
     Route::post('/logout', [AuthController::class, 'logout']);
 
 });
